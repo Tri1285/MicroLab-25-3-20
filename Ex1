@@ -1,0 +1,41 @@
+#define MOTOR_D1_PIN 4
+#define MOTOR_D2_PIN 2
+#define MOTOR_PWM_PIN 3
+
+void setup() {Serial.begin(9600);
+pinMode(MOTOR_D1_PIN,OUTPUT);
+pinMode(MOTOR_D2_PIN,OUTPUT);
+pinMode(MOTOR_PWM_PIN,OUTPUT);
+}
+void loop() {  
+
+delay(1000);
+
+
+}
+int doraemon(int one){
+  if (one>0){
+digitalWrite(MOTOR_D1_PIN,HIGH);
+digitalWrite(MOTOR_D2_PIN,LOW);
+analogWrite(MOTOR_PWM_PIN,one);
+     Serial.print(one);
+  }
+  else if (one==0){
+digitalWrite(MOTOR_D1_PIN,HIGH);
+digitalWrite(MOTOR_D2_PIN,HIGH);
+analogWrite(MOTOR_PWM_PIN,one);
+ Serial.print(one); }
+    else if (one<0){
+       Serial.print(one);
+      one=-one;
+digitalWrite(MOTOR_D1_PIN,LOW);
+digitalWrite(MOTOR_D2_PIN,HIGH);
+analogWrite(MOTOR_PWM_PIN,one);
+ }
+}
+void serialEvent() {
+  int speed = Serial.parseInt();
+  Serial.print("Reciving:");
+  Serial.println(speed);
+  doraemon(speed);
+}
